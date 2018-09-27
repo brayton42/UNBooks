@@ -17,16 +17,25 @@ public class AmazonCrawler extends WebCrawler
 	
 	public void crawl() throws IOException
 	{
-		super.crawl();
-		for (Element link : super.getLinks()) {
-
-                String attr1 = link.attr("href");
+		Document doc = super.crawl(super.getAddress());
+        super.setLinks(doc.select("a[href]"));  //intializes the Elements so that only hyperlinks are stored in it 
+			
+		for (Element link : super.getLinks())  //grabs all the links from the page
+		{
+         
+				String attr1 = link.attr("href"); //puts a flag by the links in each link grabbed
 				
-				//change String to address for amazon book id
-                if (attr1.startsWith("")) {
+				//sees if the result is a book or ebook and removes all review links
+                if (attr1.contains("book") && !attr1.contains("review")) //Sees if the link links to a book. If it does the link is added to the Result set.
+				{
                     super.add(attr1);
                 }
-            }
+		}
+			for (String x: super.getResults()) //prints out each link
+			{
+				System.out.println(x);
+				System.out.println("****");
+			}
 	}
 	
 	public void crawlBook() throws IOException

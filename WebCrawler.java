@@ -19,15 +19,13 @@ public abstract class WebCrawler
 		address = addressIn;
 		results = new HashSet<>();
 	}
-		
-	public void crawl() throws IOException
+	
+	public Document crawl(String url) throws IOException
 	{
-		Document doc = Jsoup
-                    .connect(address)
+		return  Jsoup
+                    .connect(url)
                     .userAgent("Jsoup client")
                     .timeout(5000).get();
-
-            links = doc.select("a[href]");
 	}
 	
 	public Elements getLinks()
@@ -45,5 +43,17 @@ public abstract class WebCrawler
 		results.add(attr1);
 	}
 	
+	public void setLinks(Elements linksIn)
+	{
+		links = linksIn;
+	}
+	
+	public String getAddress()
+	{
+		return address;
+	}
+	
+	public abstract void crawl() throws IOException;
 	public abstract void crawlBook() throws IOException;
+	
 }

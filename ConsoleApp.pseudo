@@ -1,0 +1,39 @@
+Pseudo code
+
+import java.io.*;
+import java.util.Scanner;
+import java.awt.Desktop;
+import java.net.URI;
+
+public class ConsoleAppV1
+{
+	public static void main(String[]args) throws Exception
+	{
+		System.out.println("Hello user please enter the name of the class and the section ID of the course you are taking.");
+		Scanner sc = new Scanner(System.in);
+		String x = sc.nextLine();
+		query database
+		if found course && has book
+		{
+			String amazonURL = "https://www.amazon.ca/s/ref=nb_sb_noss_2?url=search-alias%3Dstripbooks&field-keywords=";
+			amazonUrl += book.title() with spaces represented by +
+			AmazonCrawler a = new AmazonCrawler(amazonURL);
+			String chaptersURL = "https://www.chapters.indigo.ca/en-ca/home/search/?keywords="
+			String end ="#page=0&pid=978149871163&sortDirection=&sortKey=";
+			chaptersURl += book.title() with spaces represented by +
+			ChaptersCrawler c   = new ChaptersCrawler(chaptersURL);
+			a.crawl();
+			c.crawl();
+			c.displayPrices();
+			a.displayPrices();
+			bookstore.displayPrices();
+		}
+		else if has not found
+		{
+			print course not found
+		}
+		else if not has book
+		{
+			print no book required for this course
+	}
+}
